@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Documento sin título</title>
+	<script src="../js/myscript.js"></script>
+	<link href="../css/estilo_inicio_administrador.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<header>
+		<div class="logo">
+			<a href="inicio_administrador.html"><img src="../img/logo.png" width="310px" height="110px" alt="" /></a>
+		</div>
+	</header>
+	<div class="parent">
+		<nav>
+			<ul>
+				<li><a href="administrador_producto.html">Ingresar producto</a></li>
+				<li><a href="administrador_ingredientes.html">Ingresar Ingredientes</a></li>
+				<li><a href="administrador_inventario.html">Ver stock de productos</a></li>
+				<li><a href="administrador_reporte.html">Reporte de ventas</a></li>
+				<li><a href="../index.html">Salir</a></li>
+			</ul>
+		</nav>
+		<div class="contenido">
+			<h3>Ingreso de Producto</h3>
+			<form id="productForm">
+				<div>
+					<label for="productName">Nombre del producto:</label>
+					<input type="text" id="productName" required>
+				</div>
+				<div id="ingredientsContainer">
+					<h3>Ingredientes:</h3>
+					<table id="ingredientsTable">
+						<tr >
+							<th style="width:50%;">Nombre del Ingrediente</th>
+							<th style="width:20%;">Cantidad</th>
+							<th style="width:15%;">Unidad de medida</th>
+							<th style="width:10%;"></th>
+						</tr>
+						
+					</table>
+				</div>
+				<br>
+				<div class="buttons">
+					<button type="button" onclick="agregarIngrediente()">Agregar Ingrediente</button>
+					<button type="submit">Guardar Producto</button>
+				</div>
+
+			</form>
+		</div>
+
+
+	</div>
+
+</body>
+
+</html>

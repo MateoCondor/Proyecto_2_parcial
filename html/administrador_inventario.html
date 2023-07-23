@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Documento sin título</title>
+	<script src="../js/stock.js"></script>
+	<link href="../css/estilo_inicio_administrador.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	<header>
+		<div class="logo">
+			<a href="inicio_administrador.html"><img src="../img/logo.png" width="310px" height="110px" alt="" /></a>
+		</div>
+	</header>
+	<div class="parent">
+		<nav>
+			<ul>
+				<li><a href="administrador_producto.html">Ingresar producto</a></li>
+				<li><a href="administrador_ingredientes.html">Ingresar Ingredientes</a></li>
+				<li><a href="administrador_inventario.html">Ver stock de productos</a></li>
+				<li><a href="administrador_reporte.html">Reporte de ventas</a></li>
+				<li><a href="../index.html">Salir</a></li>
+			</ul>
+		</nav>
+		<div class="contenido">
+			<div id="searchContainer">
+				<input type="text" id="inputProducto" placeholder="Nombre del producto">
+				<button onclick="buscarProductoPorNombre()">Buscar</button>
+			</div>
+			<br><br>
+			<div id="tablaProductos">
+				<!-- Aquí se generará la tabla de productos -->
+			</div>
+
+
+
+
+
+
+			<div id="ingredientsContainer">
+				<h3>Ingredientes:</h3>
+				<table id="ingredientsTable">
+					<tr>
+						<th style="width:45%;">Nombre del Ingrediente</th>
+						<th style="width:15%;">Cantidad</th>
+						<th style="width:15%;">Unidad de medida</th>
+						<th style="width:15%;">Precio por U/gr/kg/L/ml</th>
+						<th style="width:10%;"></th>
+					</tr>
+
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
