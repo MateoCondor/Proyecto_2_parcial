@@ -8,8 +8,8 @@ function validarNombre() {
   let nombreControl = false;
   let nombre = "";
 
-  nombre = document.getElementById("usuario").value;
-  password = document.getElementById("password").value;
+  nombre = document.getElementById("usuarioLogin").value;
+  password = document.getElementById("passwordLogin").value;
   if (nombre.length == 0 || !expRegNombre.exec(nombre)) {
     alert("Solo se admiten letras y espacios");
     
@@ -26,8 +26,14 @@ function validarNombre() {
   }
   return nombreControl;
 }
+function inciarSesion() {
+  
+  if (validarNombre()) {
+    alert("Bienvenido");
+    window.location.href = "inicio_administrador.html";
+  }
+}
 
-const loginButton = document.getElementById("iniciarSesionLogin");
 
 register.addEventListener("click", () => {
   container.classList.add("right-panel-active");
@@ -37,21 +43,10 @@ login.addEventListener("click", () => {
   container.classList.remove("right-panel-active");
 });
 
+
+
+const loginButton = document.getElementById("iniciarSesionLogin");
 loginButton.addEventListener("click", () => {
-  
-});
-
-function inciarSesion() {
-  
-  if (validarNombre()) {
-    alert("Bienvenido");
-    window.location.href = "http://" + document.domain + "/inicio_administrador.html";
-  }
-  
-  
-  
-}
-
-document.getElementById("enlaceIniciarSesion").addEventListener("click", function() {
   inciarSesion();
 });
+
