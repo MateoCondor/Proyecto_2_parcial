@@ -50,3 +50,8 @@ loginButton.addEventListener("click", () => {
   inciarSesion();
 });
 
+const registerButton = document.getElementById("registrarseLogin");
+registerButton.addEventListener("click", () => {
+alert("Registro inhabilitado por el momento");
+});
+
