@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 23-08-2023 a las 21:51:58
+-- Tiempo de generación: 26-08-2023 a las 19:38:22
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -19,26 +19,32 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `bd_p`
+-- Base de datos: `proyecto_bd`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbladminusers`
+-- Estructura de tabla para la tabla `mainlogin`
 --
 
-CREATE TABLE `tbladminusers` (
-  `user` varchar(34) NOT NULL,
-  `password` varchar(34) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `mainlogin` (
+  `id` int(10) NOT NULL,
+  `username` varchar(15) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `email` varchar(40) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `password` varchar(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `role` varchar(10) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `Active` int(2) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=COMPACT;
 
 --
--- Volcado de datos para la tabla `tbladminusers`
+-- Volcado de datos para la tabla `mainlogin`
 --
 
-INSERT INTO `tbladminusers` (`user`, `password`) VALUES
-('admin1', 'admin1');
+INSERT INTO `mainlogin` (`id`, `username`, `email`, `password`, `role`, `Active`) VALUES
+(1, 'admin1', 'admin1@admin.com', 'admin123', 'admin', 1),
+(2, 'bodega1', 'bodega1@bodega.com', 'bodega123', 'bodega', 1),
+(3, 'mateo', 'condormateo00@gmail.com', 'mj241726', 'bodega', 1);
 
 -- --------------------------------------------------------
 
@@ -60,15 +66,25 @@ CREATE TABLE `tblingredientes` (
 --
 
 INSERT INTO `tblingredientes` (`ID`, `Descripcion`, `Cantidad`, `Unidad`, `Precio`, `Active`) VALUES
-(1, 'Peperoni', 20, 'Unidades', 1.2, '0'),
-(2, 'Queso', 11, 'gr', 1.5, '1'),
+(1, 'Peperoni', 0, '', 0, '1'),
+(2, 'Queso', 4, 'kg', 1.5, '1'),
 (3, 'Harina', 50, 'gr', 1.8, '1'),
 (4, 'Mortadela', 70, 'gr', 1.9, '1'),
-(5, 'Carne', 2, 'kg', 2, '1');
+(5, 'Carne', 2, 'kg', 2, '1'),
+(6, 'Zanahoria', 2, 'unidad', 2.3, '1'),
+(7, 'Jamon', 5, 'kg', 2.6, '1'),
+(9, 'Leche', 2, 'l', 0.9, '1'),
+(11, 'Piña', 2, 'unidad', 1.5, '1');
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `mainlogin`
+--
+ALTER TABLE `mainlogin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tblingredientes`
@@ -81,10 +97,16 @@ ALTER TABLE `tblingredientes`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `mainlogin`
+--
+ALTER TABLE `mainlogin`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `tblingredientes`
 --
 ALTER TABLE `tblingredientes`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
