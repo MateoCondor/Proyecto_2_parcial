@@ -53,7 +53,7 @@ if (isset($_REQUEST['btn_login'])) {
                         $_SESSION["username"] = $dbusername;
                         $_SESSION["user_role"] = "bodega";
                         $loginMsg = "Personal: Inicio sesión con éxito";
-                        header("refresh:0; Bodega/index.php ");
+                        header("refresh:0; Bodega/index.php");
                         break;
 
                     case "produccion":
@@ -61,7 +61,7 @@ if (isset($_REQUEST['btn_login'])) {
                         $_SESSION["username"] = $dbusername;
                         $_SESSION["user_role"] = "produccion";
                         $loginMsg = "Usuario: Inicio sesión con éxito";
-                        header("refresh:0; ");
+                        header("refresh:0; Produccion/index.php");
                         break;
 
                     case "ventas":
@@ -69,15 +69,15 @@ if (isset($_REQUEST['btn_login'])) {
                         $_SESSION["username"] = $dbusername;
                         $_SESSION["user_role"] = "ventas";
                         $loginMsg = "Admin: Inicio sesión con éxito";
-                        header("refresh:0; ");
+                        header("refresh:0; Ventas/index.php");
                         break;
 
                     case "reportes":
                         $_SESSION["reportes_login"] = $email;
                         $_SESSION["username"] = $dbusername;
-                        $_SESSION["user_role"] = "resportes";
+                        $_SESSION["user_role"] = "reportes";
                         $loginMsg = "Admin: Inicio sesión con éxito";
-                        header("refresh:0; ");
+                        header("refresh:0; Reportes/index.php");
                         break;
 
                     default:

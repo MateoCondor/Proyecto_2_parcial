@@ -77,10 +77,10 @@ if (isset($_POST['submit'])) {
                     <ul class="nav flex-column">
 
                         <li class="nav-item">
-                            <a href="ingreso.php">Ingresar ingredientes</a>
+                            <a href="ingreso.php">Ingresar nuevo ingrediente</a>
                         </li>
                         <li class="nav-item">
-                            <a href="edit.php">Aumentar</a>
+                            <a href="edit.php">Aumentar inventario de ingrediente</a>
                         </li>
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
@@ -105,7 +105,7 @@ if (isset($_POST['submit'])) {
                             ?>
                         </select>
 
-                        <button  class="" name="search">buscar</button>
+                        <button class="" name="search">buscar</button>
 
                     </form>
 

@@ -2,7 +2,7 @@
 $db_host="localhost"; //localhost server 
 $db_user="root"; //database username
 $db_password="rootroot"; //database password 
-$db_name="bd_p"; //database name
+$db_name="proyecto_bd"; //database name
 
 try
 {

@@ -79,6 +79,7 @@ if (isset($_GET['activacionid'])) {
                 </nav>
             </div>
             <div class="col col-sm-12 col-md-12 col-lg-8 col-xl-8 m-0">
+                <h2>Sistema administrador </h2>
                 <h3>Bienvenido,
                     <?php echo $_SESSION["username"]; ?>
                 </h3>
@@ -139,7 +140,7 @@ if (isset($_GET['activacionid'])) {
                                                 <?php
                                                 if ($row['role'] == 'admin') {
                                                     ?>
-                                                    
+
                                                     <?php
                                                 } else {
                                                     ?>
@@ -155,20 +156,20 @@ if (isset($_GET['activacionid'])) {
                                                         onclick="return confirm('Porfavor confirma que deseas activar este perfil');"><i
                                                             class="material-icons">&#xE876;</i></a>
 
-                                                <?php
+                                                    <?php
                                                 }
                                                 ?>
                                             </td>
                                         </tr>
-                                <?php
+                                        <?php
                                         $cnt = $cnt + 1;
                                     }
                                 } else {
-                                ?>
+                                    ?>
                                     <tr>
                                         <th style="text-align:center; color:red;" colspan="6">No Record Found</th>
                                     </tr>
-                                <?php
+                                    <?php
                                 }
                                 ?>
 

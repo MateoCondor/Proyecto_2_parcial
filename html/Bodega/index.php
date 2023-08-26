@@ -89,10 +89,10 @@ if (isset($_GET['activacionid'])) {
                     <ul class="nav flex-column">
 
                         <li class="nav-item">
-                            <a href="ingreso.php">Ingresar ingredientes</a>
+                            <a href="ingreso.php">Ingresar nuevo ingrediente</a>
                         </li>
                         <li class="nav-item">
-                            <a href="edit.php">Aumentar</a>
+                            <a href="edit.php">Aumentar inventario de ingrediente</a>
                         </li>
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
@@ -101,10 +101,13 @@ if (isset($_GET['activacionid'])) {
                 </nav>
             </div>
             <div class="col col-sm-12 col-md-12 col-lg-8 col-xl-8 m-0">
-                
+                <h2>Sistema bodega</h2>
+                <h3>Bienvenido,
+                    <?php echo $_SESSION["username"]; ?>
+                </h3>
 
                 <div id="container">
-                    
+
                     <div class="container-xl">
                         <div class="table-title">
                             <div class="row">
@@ -155,16 +158,12 @@ if (isset($_GET['activacionid'])) {
                                                 <?php echo $row['Active']; ?>
                                             </td>
                                             <td>
-                                                <!--<a href="read.php?viewid=<?php echo htmlentities($row['ID']); ?>" class="view" title="View" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>-->
-                                                <a href="edit.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit"
-                                                    title="Edit" data-toggle="tooltip"><i
-                                                        class="material-icons">&#xE254;</i></a>
-                                                <a href="index.php?delid=<?php echo ($row['ID']); ?>"
-                                                    class="delete" title="Delete" data-toggle="tooltip"
+                                                <a href="index.php?delid=<?php echo ($row['ID']); ?>" class="delete"
+                                                    title="Delete" data-toggle="tooltip"
                                                     onclick="return confirm('Porfavor confirma que deseas desactivar este ingrdiente');"><i
                                                         class="material-icons">&#xE872;</i></a>
-                                                <a href="index.php?activacionid=<?php echo ($row['ID']); ?>"
-                                                    class="delete" title="Activate" data-toggle="tooltip"
+                                                <a href="index.php?activacionid=<?php echo ($row['ID']); ?>" class="delete"
+                                                    title="Activate" data-toggle="tooltip"
                                                     onclick="return confirm('Porfavor confirma que deseas activar este ingrdiente');"><i
                                                         class="material-icons">&#xE876;</i></a>
                                             </td>
