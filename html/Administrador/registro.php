@@ -163,17 +163,14 @@ if (isset($_REQUEST['btn_register'])) //compruebe el nombre del botón "btn_regi
 
                             <div class="form-group">
                                 <div class="col-sm-12">
-                                    <input type="submit" name="btn_register" class="btn btn-primary btn-block"
-                                        value="Registro"><br><br>
-                                    <a href="index.php" class="btn btn-danger">Cancelar</a>
+                                    <input type="submit" name="btn_register" class="boton perz"
+                                        value="Registrar nuevo perfil">
+                                    <a href="index.php" class="boton perz">Cancelar</a>
                                 </div>
                             </div>
 
                         </form>
                     </div>
-
-
-
                 </div>
             </div>
         </div>

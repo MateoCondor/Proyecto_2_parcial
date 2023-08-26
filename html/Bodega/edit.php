@@ -13,15 +13,22 @@ include('../dbconnection.php');
 
 if (isset($_POST['submit'])) {
 
-    $desc = $_GET["desc"];
-    $cantidad = $_POST['cantidad'];
-    $umedida = $_POST['unidad'];
-    $preciou = $_POST['precio'];
+
+
+    $descu = $_POST['nombre'];
+
+    $ret2 = mysqli_query($con, "select * from tblingredientes where Descripcion='$descu'");
+    while ($row2 = mysqli_fetch_array($ret2)) {
+        $cantidad = $_POST['cantidad'] + $row2['Cantidad'];
+        $cod = $row2['ID'];
+        $unidad = $row2['Unidad'];
+    }
 
     //Query for data updation
-    $query = mysqli_query($con, "update  tblingredientes set  Cantidad='$cantidad', Unidad='$umedida', Precio='$preciou' where Descripcion='$desc'");
+    $query = mysqli_query($con, "update  tblingredientes set  Cantidad='$cantidad' where Descripcion='$descu'");
+    $query2 = mysqli_query($con, "insert into tblingreso (ID, CantIngresada, UnidadIng) value('$cod','$cantidad','$unidad')");
 
-    if ($query) {
+    if ($query || $query2) {
         echo "<script>alert('You have successfully update the data');</script>";
         echo "<script type='text/javascript'> document.location ='index.php'; </script>";
     } else {
@@ -75,7 +82,9 @@ if (isset($_POST['submit'])) {
             <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 ">
                 <nav>
                     <ul class="nav flex-column">
-
+                        <li class="nav-item">
+                            <a href="index.php">Inicio</a>
+                        </li>
                         <li class="nav-item">
                             <a href="ingreso.php">Ingresar nuevo ingrediente</a>
                         </li>
@@ -89,54 +98,57 @@ if (isset($_POST['submit'])) {
                 </nav>
             </div>
             <div class="col col-sm-12 col-md-12 col-lg-8 col-xl-8 m-0">
-                <h3>Ingreso de Ingredientes a inventario</h3>
-
+                <h3>Aumentar en inventario</h3><br>
                 <div id="container">
-                    <h2>Aumentar a inventario </h2>
-                    <form action="" method="POST">
-                        <label for="nombre">Nombre del Ingrediente:</label>
-                        <select id="nombre" name="nombre">
-                            <option value="">SELECCIONAR INGREDIENTE</option>
+                    <form action="" method="POST" id="miFormulario">
+                        <label for="desc">Nombre del Ingrediente:</label>
+                        <select id="desc" name="desc">
+                            <option value="" <?php if (empty($_POST['desc']))
+                                echo 'selected'; ?>>SELECCIONAR INGREDIENTE
+                            </option>
                             <?php
                             $query = $con->query("SELECT * FROM tblingredientes");
                             while ($valores = mysqli_fetch_array($query)) {
-                                echo '<option value="' . $valores['Descripcion'] . '">' . $valores['Descripcion'] . '</option>';
+                                if ($valores['Active'] != 0) {
+                                    echo '<option value="' . $valores['Descripcion'] . '" ';
+                                    if (isset($_POST['desc']) && $_POST['desc'] == $valores['Descripcion'])
+                                        echo 'selected';
+                                    echo '>' . $valores['Descripcion'] . '</option>';
+                                }
+
                             }
                             ?>
-                        </select>
-
-                        <button class="" name="search">buscar</button>
-
+                        </select><br><br>
                     </form>
+
+                    <script>
+                        document.getElementById("desc").addEventListener("change", function () {
+                            document.getElementById("miFormulario").submit();
+                        });
+                    </script>
+
 
                     <form action="" method="POST">
 
                         <div class="form-group">
                             <?php
-                            $desc = $_POST['nombre'];
+                            $desc = $_POST['desc'];
                             $ret = mysqli_query($con, "select * from tblingredientes where Descripcion='$desc'");
                             while ($row = mysqli_fetch_array($ret)) {
                                 ?>
-                                <label for="cantidad">Cantidad:</label>
-                                <input type="number" id="cantidad" name="cantidad" value="<?php echo $row['Cantidad']; ?>"
+
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" id="nombre" name="nombre" value="<?php echo $row['Descripcion']; ?>"
                                     required><br><br>
 
-                                <label for="unidad">Unidad de Medida:</label>
-                                <select id="unidad" name="unidad">
-                                    <option value="kg">Kilogramos (kg)</option>
-                                    <option value="g">Gramos (g)</option>
-                                    <option value="l">Litros (l)</option>
-                                    <option value="ml">Mililitros (ml)</option>
-                                    <option value="unidad">Unidad</option>
-                                </select><br><br>
-
-                                <label for="precio">Precio por Unidad de Medida:</label>
-                                <input type="number" step="0.01" id="precio" name="precio"
-                                    value="<?php echo $row['Precio']; ?>" required><br><br>
+                                <label for="cantidad">Cantidad:</label>
+                                <input type="number" id="cantidad" name="cantidad" required>
+                                <?php echo $row['Unidad']; ?><br><br>
                                 <?php
                             } ?>
                             <div class="form-group">
-                                <button type="submit" class="boton perz" name="submit">Actualizar datos</button>
+                                <button type="submit" class="boton perz" name="submit">Aumentar datos</button>
+                                <a href="index.php" class="boton perz">Cancelar</a>
                             </div>
                         </div>
                     </form>

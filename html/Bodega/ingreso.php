@@ -72,7 +72,9 @@ if (isset($_POST['submit'])) {
             <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 ">
                 <nav>
                     <ul class="nav flex-column">
-
+                        <li class="nav-item">
+                            <a href="index.php">Inicio</a>
+                        </li>
                         <li class="nav-item">
                             <a href="ingreso.php">Ingresar nuevo ingrediente</a>
                         </li>
@@ -106,11 +108,11 @@ if (isset($_POST['submit'])) {
                             <div class="col-sm-12 col-md-6 col-lg-3 col-xl-4 my-4">
                                 <label for="unidad">Unidad de Medida:</label>
                                 <select id="unidad" name="unidad">
-                                    <option value="kg">Kilogramos (kg)</option>
-                                    <option value="g">Gramos (g)</option>
-                                    <option value="l">Litros (l)</option>
-                                    <option value="ml">Mililitros (ml)</option>
-                                    <option value="unidad">Unidad/es</option>
+                                    <option value="Kilogramo/s">Kilogramos (kg)</option>
+                                    <option value="Gramos">Gramos (g)</option>
+                                    <option value="Litro/s">Litros (l)</option>
+                                    <option value="Mililitros">Mililitros (ml)</option>
+                                    <option value="Unidad/es">Unidad/es</option>
                                 </select>
                             </div>
 
@@ -121,7 +123,7 @@ if (isset($_POST['submit'])) {
                         </div>
                         <button type="submit" class="boton perz" name="submit">Agregar ingrediente</button>
                         <a href="index.php" class="boton perz">Cancelar</a>
-                        
+
                     </form>
                 </div>
                 </form>

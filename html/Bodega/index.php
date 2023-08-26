@@ -31,14 +31,14 @@ if (isset($_GET['delid'])) {
     $rid = intval($_GET['delid']);
     $sql = mysqli_query($con, "UPDATE `tblingredientes` SET `Active`= '0' where ID=$rid");
     echo "<script>alert('Data deleted');</script>";
-    echo "<script>window.location.href = 'administrador_ingredientes.php'</script>";
+    echo "<script>window.location.href = 'index.php'</script>";
 }
 
 if (isset($_GET['activacionid'])) {
     $rid = intval($_GET['activacionid']);
     $sql = mysqli_query($con, "UPDATE `tblingredientes` SET `Active`= '1' where ID=$rid");
     echo "<script>alert('Data deleted');</script>";
-    echo "<script>window.location.href = 'administrador_ingredientes.php'</script>";
+    echo "<script>window.location.href = 'index.php'</script>";
 }
 
 
@@ -87,7 +87,9 @@ if (isset($_GET['activacionid'])) {
             <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 ">
                 <nav>
                     <ul class="nav flex-column">
-
+                        <li class="nav-item">
+                            <a href="index.php">Inicio</a>
+                        </li>
                         <li class="nav-item">
                             <a href="ingreso.php">Ingresar nuevo ingrediente</a>
                         </li>
@@ -135,7 +137,11 @@ if (isset($_GET['activacionid'])) {
                                 $row = mysqli_num_rows($ret);
                                 if ($row > 0) {
                                     while ($row = mysqli_fetch_array($ret)) {
-
+                                        if ($row['Active'] == 1) {
+                                            $activeMessage = 'Activo';
+                                        } elseif ($row['Active'] == 0) {
+                                            $activeMessage = 'Inactivo';
+                                        }
                                         ?>
                                         <!--Fetch the Records -->
                                         <tr>
@@ -155,17 +161,23 @@ if (isset($_GET['activacionid'])) {
                                                 <?php echo $row['Precio']; ?> $
                                             </td>
                                             <td>
-                                                <?php echo $row['Active']; ?>
+                                                <?php echo $activeMessage; ?>
                                             </td>
                                             <td>
-                                                <a href="index.php?delid=<?php echo ($row['ID']); ?>" class="delete"
-                                                    title="Delete" data-toggle="tooltip"
-                                                    onclick="return confirm('Porfavor confirma que deseas desactivar este ingrdiente');"><i
-                                                        class="material-icons">&#xE872;</i></a>
-                                                <a href="index.php?activacionid=<?php echo ($row['ID']); ?>" class="delete"
-                                                    title="Activate" data-toggle="tooltip"
-                                                    onclick="return confirm('Porfavor confirma que deseas activar este ingrdiente');"><i
-                                                        class="material-icons">&#xE876;</i></a>
+                                                <?php if ($row['Active'] == 1): ?>
+                                                    <a href="edit3.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit"
+                                                        title="Editar" data-toggle="tooltip"><i
+                                                            class="material-icons">&#xE254;</i></a>
+                                                    <a href="index.php?delid=<?php echo ($row['ID']); ?>" class="delete"
+                                                        title="Delete" data-toggle="tooltip"><i
+                                                            class="material-icons">&#xE872;</i></a>
+                                                <?php else: ?>
+
+                                                    <a href="index.php?activacionid=<?php echo ($row['ID']); ?>" class="delete"
+                                                        title="Activate" data-toggle="tooltip"><i
+                                                            class="material-icons">&#xE876;</i></a>
+                                                <?php endif; ?>
+
                                             </td>
                                         </tr>
                                         <?php
@@ -173,7 +185,7 @@ if (isset($_GET['activacionid'])) {
                                     }
                                 } else { ?>
                                     <tr>
-                                        <th style="text-align:center; color:red;" colspan="6">No Record Found</th>
+                                        <th style="text-align:center; color:red;" colspan="6">Base de datos vacia</th>
                                     </tr>
                                 <?php } ?>
 
