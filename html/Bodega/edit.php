@@ -19,11 +19,15 @@ if (isset($_POST['submit'])) {
         $cantidad = $_POST['cantidad'] + $row2['Cantidad'];
         $cod = $row2['ID'];
         $unidad = $row2['Unidad'];
+        $precio = $row2['Precio'];
     }
 
     //Query for data updation
     $query = mysqli_query($con, "update  tblingredientes set  Cantidad='$cantidad' where Descripcion='$descu'");
-    $query2 = mysqli_query($con, "insert into tblingreso (ID, CantIngresada, UnidadIng) value('$cod','$cantidad','$unidad')");
+    if ($descu = $_POST['nombre'] != '') {
+        $query2 = mysqli_query($con, "insert into tblingreso (ID, CantIngresada, UnidadIng) value('$cod','$cantidad','$unidad')");
+    }
+
 
     if ($query || $query2) {
         echo "<script>alert('You have successfully update the data');</script>";
@@ -124,7 +128,6 @@ if (isset($_POST['submit'])) {
                         });
                     </script>
 
-
                     <form action="" method="POST">
 
                         <div class="form-group">
@@ -134,14 +137,22 @@ if (isset($_POST['submit'])) {
                             while ($row = mysqli_fetch_array($ret)) {
                                 ?>
                                 <input type="hidden" id="nombre" name="nombre" value="<?php echo $row['Descripcion']; ?>"
-                                    required>
-                                <label for="cantidad">Cantidad:</label>
+                                    required> 
+                                <label for="cantidad">Cantidad actual <b> <?php echo $row['Cantidad']; ?></b> </label><br>    
+                                <label for="cantidad">Añadir: </label>
                                 <input type="number" id="cantidad" name="cantidad" required>
                                 <?php echo $row['Unidad']; ?><br><br>
                                 <?php
                             } ?>
                             <div class="form-group">
-                                <button type="submit" class="boton perz" name="submit">Aumentar datos</button>
+                                <?php
+                                if ($desc != '') {
+                                    ?>
+                                    <button type="submit" class="boton perz" name="submit">Aumentar datos</button>
+                                    <?php
+                                }
+                                ?>
+                                
                                 <a href="index.php" class="boton perz">Cancelar</a>
                             </div>
                         </div>
