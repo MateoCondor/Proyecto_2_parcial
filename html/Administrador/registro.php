@@ -42,15 +42,16 @@ if (isset($_REQUEST['btn_register'])) //compruebe el nombre del botón "btn_regi
             } else if ($row["email"] == $email) {
                 $errorMsg[] = "Email ya existe"; //Verificar email existente
             } else if (!isset($errorMsg)) {
-                $insert_stmt = $db->prepare("INSERT INTO mainlogin(username,email,password,role) VALUES(:uname,:uemail,:upassword,:urole)"); //Consulta sql de insertar 
+                $hashed_password = md5($password);
+                $insert_stmt = $db->prepare("INSERT INTO mainlogin(username,email,password,role) VALUES(:uname,:uemail,:upassword,:urole)");
                 $insert_stmt->bindParam(":uname", $username);
-                $insert_stmt->bindParam(":uemail", $email); //parámetros de enlace 
-                $insert_stmt->bindParam(":upassword", $password);
+                $insert_stmt->bindParam(":uemail", $email);
+                $insert_stmt->bindParam(":upassword", $hashed_password);
                 $insert_stmt->bindParam(":urole", $role);
 
                 if ($insert_stmt->execute()) {
-                    $registerMsg = "Registro exitoso: Esperar página de inicio de sesión"; //Ejecuta consultas 
-                    header("refresh:0;index.php"); //Actualizar despues de 2 segundo a la portada
+                    $registerMsg = "Registro exitoso: Esperar página de inicio de sesión";
+                    header("refresh:0;index.php");
                 }
             }
         } catch (PDOException $e) {

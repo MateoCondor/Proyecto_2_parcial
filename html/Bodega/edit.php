@@ -12,9 +12,6 @@ if ($_SESSION["user_role"] !== "bodega") {
 include('../dbconnection.php');
 
 if (isset($_POST['submit'])) {
-
-
-
     $descu = $_POST['nombre'];
 
     $ret2 = mysqli_query($con, "select * from tblingredientes where Descripcion='$descu'");
@@ -136,11 +133,8 @@ if (isset($_POST['submit'])) {
                             $ret = mysqli_query($con, "select * from tblingredientes where Descripcion='$desc'");
                             while ($row = mysqli_fetch_array($ret)) {
                                 ?>
-
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" name="nombre" value="<?php echo $row['Descripcion']; ?>"
-                                    required><br><br>
-
+                                <input type="hidden" id="nombre" name="nombre" value="<?php echo $row['Descripcion']; ?>"
+                                    required>
                                 <label for="cantidad">Cantidad:</label>
                                 <input type="number" id="cantidad" name="cantidad" required>
                                 <?php echo $row['Unidad']; ?><br><br>

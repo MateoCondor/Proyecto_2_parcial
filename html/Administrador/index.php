@@ -13,14 +13,12 @@ include('../dbconnection.php');
 if (isset($_GET['delid'])) {
     $rid = intval($_GET['delid']);
     $sql = mysqli_query($con, "UPDATE `mainlogin` SET `Active`= '0' where id=$rid");
-    echo "<script>alert('Data deleted');</script>";
     echo "<script>window.location.href = 'index.php'</script>";
 }
 
 if (isset($_GET['activacionid'])) {
     $rid = intval($_GET['activacionid']);
     $sql = mysqli_query($con, "UPDATE `mainlogin` SET `Active`= '1' where id=$rid");
-    echo "<script>alert('Data deleted');</script>";
     echo "<script>window.location.href = 'index.php'</script>";
 }
 
@@ -142,19 +140,22 @@ if (isset($_GET['activacionid'])) {
                                                     ?>
 
                                                     <?php
+                                                } else if ($row['Active'] == 1) {
+                                                    ?>
+                                                        <a href="edit.php?editid=<?php echo htmlentities($row['id']); ?>" class="edit"
+                                                            title="Edit" data-toggle="tooltip"><i
+                                                                class="material-icons">&#xE254;</i></a>
+                                                        <a href="index.php?delid=<?php echo ($row['id']); ?>" class="delete"
+                                                            title="Delete" data-toggle="tooltip"
+                                                            onclick="return confirm('Porfavor confirma que deseas desactivar este perfil');"><i
+                                                                class="material-icons">&#xE5C9;</i></a>
+                                                    <?php
                                                 } else {
                                                     ?>
-                                                    <a href="edit.php?editid=<?php echo htmlentities($row['id']); ?>" class="edit"
-                                                        title="Edit" data-toggle="tooltip"><i
-                                                            class="material-icons">&#xE254;</i></a>
-                                                    <a href="index.php?delid=<?php echo ($row['id']); ?>" class="delete"
-                                                        title="Delete" data-toggle="tooltip"
-                                                        onclick="return confirm('Porfavor confirma que deseas desactivar este perfil');"><i
-                                                            class="material-icons">&#xE872;</i></a>
-                                                    <a href="index.php?activacionid=<?php echo ($row['id']); ?>" class="delete"
-                                                        title="Activate" data-toggle="tooltip"
-                                                        onclick="return confirm('Porfavor confirma que deseas activar este perfil');"><i
-                                                            class="material-icons">&#xE876;</i></a>
+                                                        <a href="index.php?activacionid=<?php echo ($row['id']); ?>" class="delete"
+                                                            title="Activate" data-toggle="tooltip"
+                                                            onclick="return confirm('Porfavor confirma que deseas activar este perfil');"><i
+                                                                class="material-icons">&#xE86C;</i></a>
 
                                                     <?php
                                                 }
