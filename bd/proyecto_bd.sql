@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-08-2023 a las 00:46:04
+-- Tiempo de generación: 28-08-2023 a las 01:44:11
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -44,7 +44,8 @@ INSERT INTO `datos_receta` (`Codigo`, `NombreReceta`, `PrecioReceta`, `FechaCrea
 (1, 'Pizza peperoni', 6.65, '2023-08-27 17:16:11', 1),
 (2, 'Pizza Mundo', 15.48, '2023-08-27 17:38:54', 1),
 (3, 'Pizza hawaiana', 8.15, '2023-08-27 17:59:18', 1),
-(5, 'Pizza jamon', 8.85, '2023-08-27 19:40:41', 1);
+(5, 'Pizza jamon', 8.85, '2023-08-27 19:40:41', 1),
+(6, 'Pizza margarita', 28.75, '2023-08-27 20:37:45', 1);
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,12 @@ INSERT INTO `ingredientes_receta` (`Codigo`, `Nombre`, `Cantidad`, `PrecioUnidad
 ('3', 'Harina', 1, 2.4, 2.4),
 ('5', 'Jamon', 0.15, 18, 2.7),
 ('5', 'Harina', 1, 2.4, 2.4),
-('5', 'Queso', 1, 3.75, 3.75);
+('5', 'Queso', 1, 3.75, 3.75),
+('6', 'Queso', 1, 3.75, 3.75),
+('6', 'Harina', 1, 2.4, 2.4),
+('6', 'Jamon', 1, 18, 18),
+('6', 'Huevos', 2, 0.2, 0.4),
+('6', 'Mozarrella', 1, 4.2, 4.2);
 
 -- --------------------------------------------------------
 
@@ -102,7 +108,7 @@ INSERT INTO `mainlogin` (`id`, `username`, `email`, `password`, `role`, `Active`
 (2, 'bodega1', 'bodega1@bodega.com', '9413b2ec11165b54fcbcc9ea60ada2d8', 'bodega', 1),
 (3, 'produccion1', 'prod1@prod.com', 'a220a758ba49c02182c149281844037f', 'produccion', 1),
 (4, 'ventas1', 'ventas1@ventas.com', '45b0af22e7f541882f31aba445e13617', 'ventas', 1),
-(5, 'reportes1', 'report1@report.com', 'b1fb16165c08b317a4bc538ad3076f54', 'reportes', 1);
+(5, 'reportes1', 'report1@report.com', 'b1fb16165c08b317a4bc538ad3076f54', 'reportes', 0);
 
 -- --------------------------------------------------------
 
@@ -126,7 +132,9 @@ CREATE TABLE `orden_prod` (
 INSERT INTO `orden_prod` (`NumeroOrden`, `FechaGeneracion`, `NombrePizza`, `Cantidad_Pizza`, `Total_Pizza`, `Precio_Orden`) VALUES
 (1, '2023-08-27 19:41:36', 'Pizza hawaiana', 1, 8.15, 8.15),
 (2, '2023-08-27 19:41:41', 'Pizza jamon', 2, 8.85, 17.7),
-(3, '2023-08-27 19:41:46', 'Pizza peperoni', 1, 6.65, 6.65);
+(3, '2023-08-27 19:41:46', 'Pizza peperoni', 1, 6.65, 6.65),
+(4, '2023-08-27 20:25:08', 'Pizza jamon', 2, 8.85, 17.7),
+(5, '2023-08-27 20:41:22', 'Pizza margarita', 3, 28.75, 86.25);
 
 -- --------------------------------------------------------
 
@@ -200,7 +208,27 @@ INSERT INTO `registro_is` (`ID`, `FechaIng`, `UserName`, `Email`) VALUES
 (3, '2023-08-27 19:31:06', 'produccion1', 'prod1@prod.com'),
 (1, '2023-08-27 19:32:15', 'Administrador', 'admin@admin.com'),
 (3, '2023-08-27 19:32:24', 'produccion1', 'prod1@prod.com'),
-(3, '2023-08-27 19:41:31', 'produccion1', 'prod1@prod.com');
+(3, '2023-08-27 19:41:31', 'produccion1', 'prod1@prod.com'),
+(1, '2023-08-27 19:50:57', 'Administrador', 'admin@admin.com'),
+(1, '2023-08-27 20:11:44', 'Administrador', 'admin@admin.com'),
+(2, '2023-08-27 20:12:51', 'bodega1', 'bodega1@bodega.com'),
+(2, '2023-08-27 20:16:21', 'bodega1', 'bodega1@bodega.com'),
+(2, '2023-08-27 20:18:03', 'bodega1', 'bodega1@bodega.com'),
+(1, '2023-08-27 20:19:59', 'Administrador', 'admin@admin.com'),
+(1, '2023-08-27 20:20:15', 'Administrador', 'admin@admin.com'),
+(2, '2023-08-27 20:20:26', 'bodega1', 'bodega1@bodega.com'),
+(3, '2023-08-27 20:25:02', 'produccion1', 'prod1@prod.com'),
+(1, '2023-08-27 20:31:18', 'Administrador', 'admin@admin.com'),
+(4, '2023-08-27 20:31:39', 'ventas1', 'ventas1@ventas.com'),
+(4, '2023-08-27 20:31:42', 'ventas1', 'ventas1@ventas.com'),
+(1, '2023-08-27 20:31:59', 'Administrador', 'admin@admin.com'),
+(5, '2023-08-27 20:35:46', 'reportes1', 'report1@report.com'),
+(5, '2023-08-27 20:35:53', 'reportes1', 'report1@report.com'),
+(1, '2023-08-27 20:36:07', 'Administrador', 'admin@admin.com'),
+(2, '2023-08-27 20:37:03', 'bodega1', 'bodega1@bodega.com'),
+(3, '2023-08-27 20:37:13', 'produccion1', 'prod1@prod.com'),
+(2, '2023-08-27 20:38:31', 'bodega1', 'bodega1@bodega.com'),
+(3, '2023-08-27 20:40:32', 'produccion1', 'prod1@prod.com');
 
 -- --------------------------------------------------------
 
@@ -229,7 +257,10 @@ INSERT INTO `tblingredientes` (`ID`, `Descripcion`, `Cantidad`, `Unidad`, `Preci
 (4, 'Queso', 5, 'Unidad/es', 3.75, '2023-08-26 22:12:46', '1'),
 (5, 'Harina', 2, 'Kilogramo/s', 2.4, '2023-08-26 22:15:29', '1'),
 (6, 'Jamon', 9, 'Kilogramo/s', 18, '2023-08-26 22:18:13', '1'),
-(7, 'Piña', 2, 'Unidad/es', 1, '2023-08-27 17:34:25', '1');
+(7, 'Piña', 2, 'Unidad/es', 1, '2023-08-27 17:34:25', '1'),
+(8, 'Mozarrella', 3, 'Kilogramo/s', 4.2, '2023-08-27 20:39:07', '1'),
+(9, 'Tomate', 10, 'Unidad/es', 0.15, '2023-08-27 20:39:32', '1'),
+(10, 'Huevos', 36, 'Kilogramo/s', 0.2, '2023-08-27 20:39:53', '1');
 
 -- --------------------------------------------------------
 
@@ -290,7 +321,7 @@ ALTER TABLE `tblingredientes`
 -- AUTO_INCREMENT de la tabla `datos_receta`
 --
 ALTER TABLE `datos_receta`
-  MODIFY `Codigo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Codigo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `mainlogin`
@@ -302,13 +333,13 @@ ALTER TABLE `mainlogin`
 -- AUTO_INCREMENT de la tabla `orden_prod`
 --
 ALTER TABLE `orden_prod`
-  MODIFY `NumeroOrden` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `NumeroOrden` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tblingredientes`
 --
 ALTER TABLE `tblingredientes`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

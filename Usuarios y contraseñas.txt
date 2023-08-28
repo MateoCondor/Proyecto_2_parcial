@@ -1,0 +1,12 @@
+admin@admin.com
+admin123
+
+bodega1@bodega.com
+bod123
+
+prod1@prod.com
+prod123
+
+ventas1@ventas.com
+ventas123
+
