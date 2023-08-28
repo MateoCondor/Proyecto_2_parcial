@@ -2,13 +2,13 @@
 session_start();
 include('../dbconnection.php'); // Asegúrate de incluir el archivo de conexión a la base de datos
 
-// if (!isset($_SESSION["user_role"]) || !isset($_SESSION["ventas_login"])) {
-//     header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
-// }
+ if (!isset($_SESSION["user_role"]) || !isset($_SESSION["ventas_login"])) {
+     header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
+ }
 
-// if ($_SESSION["user_role"] !== "ventas") {
-//     header("Location: ../login.php"); // Redirigir si el rol no es admin
-// }
+ if ($_SESSION["user_role"] !== "ventas") {
+     header("Location: ../login.php"); // Redirigir si el rol no es admin
+}
 
 ?>
 
@@ -53,10 +53,7 @@ include('../dbconnection.php'); // Asegúrate de incluir el archivo de conexión
             <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3 ">
                 <nav>
                     <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a href="">seccion pagina</a>
-                        </li>
-                        <!--aqui se ponen las secciones que tendra cada pagina inicial de cada perfil-->
+                        
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
                         </li>

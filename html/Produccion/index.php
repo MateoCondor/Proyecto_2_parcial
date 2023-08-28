@@ -107,7 +107,7 @@ if (isset($_GET['activacionid'])) {
                             if ($row > 0) {
                                 while ($row = mysqli_fetch_array($ret)) {
                                     ?>
-                                    <tr <?php echo $rowClass; ?>>
+                                    <tr>
                                         <td>
                                             <?php echo $row['Codigo']; ?>
                                         </td>

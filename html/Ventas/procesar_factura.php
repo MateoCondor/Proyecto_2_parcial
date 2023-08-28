@@ -1,7 +1,19 @@
 <?php
+session_start();
+include('../dbconnection.php'); // Asegúrate de incluir el archivo de conexión a la base de datos
+
+ if (!isset($_SESSION["user_role"]) || !isset($_SESSION["ventas_login"])) {
+     header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
+ }
+
+ if ($_SESSION["user_role"] !== "ventas") {
+     header("Location: ../login.php"); // Redirigir si el rol no es admin
+}
+
+
 require('../../fpdf/fpdf.php');
 
-// Asegurarse de que se utiliza la codificación UTF-8
+
 header('Content-Type: text/html; charset=utf-8');
 
 class PDF extends FPDF
