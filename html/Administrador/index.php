@@ -126,7 +126,7 @@ if (isset($_GET['activacionid'])) {
                                                 <?php echo $row['email']; ?>
                                             </td>
                                             <td>
-                                                <?php echo $row['password']; ?>
+                                                **********
                                             </td>
                                             <td>
                                                 <?php echo $row['role']; ?>

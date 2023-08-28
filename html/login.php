@@ -82,14 +82,6 @@ if (isset($_REQUEST['btn_login'])) {
                                 header("refresh:0; Ventas/index.php");
                                 break;
 
-                            case "reportes":
-                                $_SESSION["reportes_login"] = $email;
-                                $_SESSION["username"] = $dbusername;
-                                $_SESSION["user_role"] = "reportes";
-                                $loginMsg = "Admin: Inicio sesión con éxito";
-                                header("refresh:0; Reportes/index.php");
-                                break;
-
                             default:
                                 echo "<script>alert('Correo electrónico o contraseña incorrectos');</script>";
                         }
