@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 28-08-2023 a las 02:25:41
+-- Tiempo de generación: 28-08-2023 a las 03:02:37
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -233,7 +233,8 @@ INSERT INTO `registro_is` (`ID`, `FechaIng`, `UserName`, `Email`) VALUES
 (4, '2023-08-27 21:13:40', 'ventas1', 'ventas1@ventas.com'),
 (1, '2023-08-27 21:14:33', 'Administrador', 'admin@admin.com'),
 (3, '2023-08-27 21:15:53', 'produccion1', 'prod1@prod.com'),
-(2, '2023-08-27 21:21:58', 'bodega1', 'bodega1@bodega.com');
+(2, '2023-08-27 21:21:58', 'bodega1', 'bodega1@bodega.com'),
+(3, '2023-08-27 21:51:19', 'produccion1', 'prod1@prod.com');
 
 -- --------------------------------------------------------
 
