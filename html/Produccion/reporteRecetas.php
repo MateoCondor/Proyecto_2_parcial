@@ -90,27 +90,26 @@ if (isset($_GET['activacionid'])) {
             </div>
             <div class="col col-sm-12 col-md-12 col-lg-8 col-xl-8 m-0">
                 <h2>Sistema produccion </h2>
-                <h3>Bienvenido,
-                    <?php echo $_SESSION["username"]; ?>
+                <h3>Reportes
                 </h3>
+                <a href="recetasPDF.php" class="boton perz">Generar PDF</a>
+                <a href="recetasEXCEL.php" class="boton perz">Generar Excel</a>
                 <div class="container">
-                    <table class="table my-4 table-borderless m-0">
+                    <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Nombre de la Pizza</th>
-                                <th>Costo total</th>
+                                <th>Código</th>
+                                <th>Nombre de la Receta</th>
+                                <th>Precio de la Receta</th>
+                                <th>Fecha de Creación</th>
                                 <th>Activo</th>
-                                <th>Accion</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $ret = mysqli_query($con, "select * from datos_receta");
-                            $cnt = 1;
-                            $row = mysqli_num_rows($ret);
-                            if ($row > 0) {
-                                while ($row = mysqli_fetch_array($ret)) {
+                            $ret = mysqli_query($con, "SELECT * FROM datos_receta");
+                            if ($ret && mysqli_num_rows($ret) > 0) {
+                                while ($row = mysqli_fetch_assoc($ret)) {
                                     ?>
                                     <tr>
                                         <td>
@@ -123,39 +122,27 @@ if (isset($_GET['activacionid'])) {
                                             <?php echo $row['PrecioReceta']; ?> $
                                         </td>
                                         <td>
-                                            <?php echo $row['Active']; ?>
+                                            <?php echo $row['FechaCreacion']; ?>
                                         </td>
                                         <td>
-                                            <?php if ($row['Active'] == 1): ?>
-                                                <a href="ver_receta.php?viewid=<?php echo htmlentities($row['Codigo']); ?>" class="view"
-                                                title="Ver" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                                                <a href="editar_receta.php?editid=<?php echo htmlentities($row['Codigo']); ?>" class="edit"
-                                                    title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                                <a href="index.php?delid=<?php echo ($row['Codigo']); ?>" class="delete" title="Delete"
-                                                    data-toggle="tooltip"
-                                                    onclick="return confirm('Porfavor confirma que deseas desactivar este ingrediente');"><i
-                                                        class="material-icons">&#xE5C9;</i></a>
-                                            <?php else: ?>
-                                                <a href="ver_receta.php?viewid=<?php echo htmlentities($row['Codigo']); ?>" class="view"
-                                                title="Ver" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
-                                                <a href="index.php?activacionid=<?php echo ($row['Codigo']); ?>" class="delete"
-                                                    title="Activate" data-toggle="tooltip"
-                                                    onclick="return confirm('Porfavor confirma que deseas activar este ingrediente');"><i
-                                                        class="material-icons">&#xE86C;</i></a>
-                                            <?php endif; ?>
+                                            <?php echo $row['Active'] == 1 ? 'Activo' : 'Inactivo'; ?>
                                         </td>
                                     </tr>
                                     <?php
-                                    $cnt = $cnt + 1;
                                 }
-                            } else { ?>
+                            } else {
+                                ?>
                                 <tr>
-                                    <th style="text-align:center; color:red;" colspan="6">No Record Found</th>
+                                    <td colspan="5">No hay registros encontrados</td>
                                 </tr>
-                            <?php } ?>
+                                <?php
+                            }
+                            ?>
 
                         </tbody>
                     </table>
+
+
                 </div>
             </div>
         </div>
