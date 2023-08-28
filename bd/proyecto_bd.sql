@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 27-08-2023 a las 14:21:04
+-- Tiempo de generación: 28-08-2023 a las 00:46:04
 -- Versión del servidor: 8.0.17
 -- Versión de PHP: 7.3.10
 
@@ -33,8 +33,18 @@ CREATE TABLE `datos_receta` (
   `NombreReceta` varchar(100) NOT NULL,
   `PrecioReceta` float NOT NULL,
   `FechaCreacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Active` int(10) NOT NULL
+  `Active` int(10) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `datos_receta`
+--
+
+INSERT INTO `datos_receta` (`Codigo`, `NombreReceta`, `PrecioReceta`, `FechaCreacion`, `Active`) VALUES
+(1, 'Pizza peperoni', 6.65, '2023-08-27 17:16:11', 1),
+(2, 'Pizza Mundo', 15.48, '2023-08-27 17:38:54', 1),
+(3, 'Pizza hawaiana', 8.15, '2023-08-27 17:59:18', 1),
+(5, 'Pizza jamon', 8.85, '2023-08-27 19:40:41', 1);
 
 -- --------------------------------------------------------
 
@@ -45,10 +55,28 @@ CREATE TABLE `datos_receta` (
 CREATE TABLE `ingredientes_receta` (
   `Codigo` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `Nombre` varchar(100) NOT NULL,
-  `Cantidad` int(10) NOT NULL,
+  `Cantidad` float NOT NULL,
   `PrecioUnidad` float NOT NULL,
   `PrecioTotal` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `ingredientes_receta`
+--
+
+INSERT INTO `ingredientes_receta` (`Codigo`, `Nombre`, `Cantidad`, `PrecioUnidad`, `PrecioTotal`) VALUES
+('1', 'Peperoni', 2, 1, 2),
+('1', 'Leche', 1, 0.9, 0.9),
+('1', 'Queso', 1, 3.75, 3.75),
+('2', 'Harina', 2, 2.4, 2.4),
+('2', 'Queso', 2, 3.75, 7.5),
+('2', 'Jamon', 2, 18, 5.58),
+('3', 'Piña', 2, 1, 2),
+('3', 'Queso', 1, 3.75, 3.75),
+('3', 'Harina', 1, 2.4, 2.4),
+('5', 'Jamon', 0.15, 18, 2.7),
+('5', 'Harina', 1, 2.4, 2.4),
+('5', 'Queso', 1, 3.75, 3.75);
 
 -- --------------------------------------------------------
 
@@ -75,6 +103,30 @@ INSERT INTO `mainlogin` (`id`, `username`, `email`, `password`, `role`, `Active`
 (3, 'produccion1', 'prod1@prod.com', 'a220a758ba49c02182c149281844037f', 'produccion', 1),
 (4, 'ventas1', 'ventas1@ventas.com', '45b0af22e7f541882f31aba445e13617', 'ventas', 1),
 (5, 'reportes1', 'report1@report.com', 'b1fb16165c08b317a4bc538ad3076f54', 'reportes', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `orden_prod`
+--
+
+CREATE TABLE `orden_prod` (
+  `NumeroOrden` int(10) NOT NULL,
+  `FechaGeneracion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `NombrePizza` varchar(50) NOT NULL,
+  `Cantidad_Pizza` int(11) NOT NULL,
+  `Total_Pizza` float NOT NULL,
+  `Precio_Orden` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Volcado de datos para la tabla `orden_prod`
+--
+
+INSERT INTO `orden_prod` (`NumeroOrden`, `FechaGeneracion`, `NombrePizza`, `Cantidad_Pizza`, `Total_Pizza`, `Precio_Orden`) VALUES
+(1, '2023-08-27 19:41:36', 'Pizza hawaiana', 1, 8.15, 8.15),
+(2, '2023-08-27 19:41:41', 'Pizza jamon', 2, 8.85, 17.7),
+(3, '2023-08-27 19:41:46', 'Pizza peperoni', 1, 6.65, 6.65);
 
 -- --------------------------------------------------------
 
@@ -125,7 +177,30 @@ INSERT INTO `registro_is` (`ID`, `FechaIng`, `UserName`, `Email`) VALUES
 (3, '2023-08-26 22:55:32', 'produccion1', 'prod1@prod.com'),
 (2, '2023-08-26 22:56:58', 'bodega1', 'bodega1@bodega.com'),
 (3, '2023-08-26 23:03:25', 'produccion1', 'prod1@prod.com'),
-(2, '2023-08-27 09:12:20', 'bodega1', 'bodega1@bodega.com');
+(2, '2023-08-27 09:12:20', 'bodega1', 'bodega1@bodega.com'),
+(1, '2023-08-27 14:53:00', 'Administrador', 'admin@admin.com'),
+(2, '2023-08-27 14:53:14', 'bodega1', 'bodega1@bodega.com'),
+(3, '2023-08-27 14:53:26', 'produccion1', 'prod1@prod.com'),
+(4, '2023-08-27 14:53:40', 'ventas1', 'ventas1@ventas.com'),
+(4, '2023-08-27 14:54:05', 'ventas1', 'ventas1@ventas.com'),
+(2, '2023-08-27 15:06:19', 'bodega1', 'bodega1@bodega.com'),
+(1, '2023-08-27 15:06:36', 'Administrador', 'admin@admin.com'),
+(2, '2023-08-27 15:11:26', 'bodega1', 'bodega1@bodega.com'),
+(3, '2023-08-27 15:12:54', 'produccion1', 'prod1@prod.com'),
+(1, '2023-08-27 15:14:55', 'Administrador', 'admin@admin.com'),
+(3, '2023-08-27 15:15:24', 'produccion1', 'prod1@prod.com'),
+(3, '2023-08-27 15:15:34', 'produccion1', 'prod1@prod.com'),
+(3, '2023-08-27 17:09:20', 'produccion1', 'prod1@prod.com'),
+(2, '2023-08-27 17:32:31', 'bodega1', 'bodega1@bodega.com'),
+(3, '2023-08-27 17:38:35', 'produccion1', 'prod1@prod.com'),
+(3, '2023-08-27 18:53:28', 'produccion1', 'prod1@prod.com'),
+(3, '2023-08-27 19:20:40', 'produccion1', 'prod1@prod.com'),
+(3, '2023-08-27 19:29:40', 'produccion1', 'prod1@prod.com'),
+(3, '2023-08-27 19:30:11', 'produccion1', 'prod1@prod.com'),
+(3, '2023-08-27 19:31:06', 'produccion1', 'prod1@prod.com'),
+(1, '2023-08-27 19:32:15', 'Administrador', 'admin@admin.com'),
+(3, '2023-08-27 19:32:24', 'produccion1', 'prod1@prod.com'),
+(3, '2023-08-27 19:41:31', 'produccion1', 'prod1@prod.com');
 
 -- --------------------------------------------------------
 
@@ -148,12 +223,13 @@ CREATE TABLE `tblingredientes` (
 --
 
 INSERT INTO `tblingredientes` (`ID`, `Descripcion`, `Cantidad`, `Unidad`, `Precio`, `FechaIngreso`, `Active`) VALUES
-(1, 'Peperoni', 12, 'Unidad/es', 1, '2023-08-26 17:17:12', '1'),
+(1, 'Peperoni', 2, 'Unidades', 1, '2023-08-26 17:17:12', '1'),
 (2, 'Leche', 12, 'Litro/s', 0.9, '2023-08-26 17:21:23', '1'),
 (3, 'Carne', 2, 'Kilogramo/s', 6.99, '2023-08-26 22:10:54', '1'),
 (4, 'Queso', 5, 'Unidad/es', 3.75, '2023-08-26 22:12:46', '1'),
 (5, 'Harina', 2, 'Kilogramo/s', 2.4, '2023-08-26 22:15:29', '1'),
-(6, 'Jamon', 7, 'kg', 18, '2023-08-26 22:18:13', '1');
+(6, 'Jamon', 9, 'Kilogramo/s', 18, '2023-08-26 22:18:13', '1'),
+(7, 'Piña', 2, 'Unidad/es', 1, '2023-08-27 17:34:25', '1');
 
 -- --------------------------------------------------------
 
@@ -175,7 +251,8 @@ CREATE TABLE `tblingreso` (
 INSERT INTO `tblingreso` (`ID`, `FechaIngreso`, `CantIngresada`, `UnidadIng`) VALUES
 (4, '2023-08-26 22:25:25', 5, 'Unidad/es'),
 (6, '2023-08-26 22:25:37', 7, 'kg'),
-(2, '2023-08-26 22:57:11', 12, 'Litro/s');
+(2, '2023-08-26 22:57:11', 12, 'Litro/s'),
+(6, '2023-08-27 15:11:41', 9, 'kg');
 
 --
 -- Índices para tablas volcadas
@@ -194,6 +271,12 @@ ALTER TABLE `mainlogin`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `orden_prod`
+--
+ALTER TABLE `orden_prod`
+  ADD PRIMARY KEY (`NumeroOrden`);
+
+--
 -- Indices de la tabla `tblingredientes`
 --
 ALTER TABLE `tblingredientes`
@@ -207,7 +290,7 @@ ALTER TABLE `tblingredientes`
 -- AUTO_INCREMENT de la tabla `datos_receta`
 --
 ALTER TABLE `datos_receta`
-  MODIFY `Codigo` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `Codigo` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `mainlogin`
@@ -216,10 +299,16 @@ ALTER TABLE `mainlogin`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT de la tabla `orden_prod`
+--
+ALTER TABLE `orden_prod`
+  MODIFY `NumeroOrden` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `tblingredientes`
 --
 ALTER TABLE `tblingredientes`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
