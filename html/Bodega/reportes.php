@@ -1,13 +1,15 @@
 <?php
 session_start();
 include('../dbconnection.php');
-// if (!isset($_SESSION["user_role"]) || !isset($_SESSION["bodega_login"])) {
-//     header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
-// }
 
-// if ($_SESSION["user_role"] !== "bodega") {
-//     header("Location: ../login.php"); // Redirigir si el rol no es admin
-// }
+if (!isset($_SESSION["user_role"]) || !isset($_SESSION["bodega_login"])) {
+    header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
+}
+
+if ($_SESSION["user_role"] !== "bodega") {
+    header("Location: ../login.php"); // Redirigir si el rol no es admin
+}
+
 if ($con->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }

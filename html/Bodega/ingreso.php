@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-// if (!isset($_SESSION["user_role"]) || !isset($_SESSION["bodega_login"])) {
-//     header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
-// }
+if (!isset($_SESSION["user_role"]) || !isset($_SESSION["bodega_login"])) {
+    header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
+}
 
-// if ($_SESSION["user_role"] !== "bodega") {
-//     header("Location: ../login.php"); // Redirigir si el rol no es admin
-// }
+if ($_SESSION["user_role"] !== "bodega") {
+    header("Location: ../login.php"); // Redirigir si el rol no es admin
+}
 
 include('../dbconnection.php');
 if (isset($_POST['submit'])) {
@@ -81,13 +81,11 @@ if (isset($_POST['submit'])) {
                         <li class="nav-item">
                             <a href="edit.php">Aumentar inventario de ingrediente</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="reportes.php">Reporte de inventario</a>
-                        </li>
+
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
                         </li>
-                        
+
                     </ul>
                 </nav>
             </div>
@@ -124,7 +122,7 @@ if (isset($_POST['submit'])) {
                                 <label for="precio">Precio por Unidad de Medida:</label>
                                 <input type="number" step="0.01" id="precio" name="precio" required>
                             </div>
-                            
+
                         </div>
                         <br><br>
                         <button type="submit" class="boton perz" name="submit">Agregar ingrediente</button>

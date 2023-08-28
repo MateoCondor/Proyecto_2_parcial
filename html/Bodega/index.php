@@ -92,7 +92,10 @@ if (isset($_GET['activacionid'])) {
                             <a href="ingreso.php">Ingresar nuevo ingrediente</a>
                         </li>
                         <li class="nav-item">
-                            <a href="aumentar.php">Aumentar inventario de ingrediente</a>
+                            <a href="aumentar.php">Aumentar ingrediente</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="reportes.php">Reporte de inventario</a>
                         </li>
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>

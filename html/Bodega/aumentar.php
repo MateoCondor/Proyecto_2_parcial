@@ -87,7 +87,7 @@ if (isset($_POST['submit'])) {
                             <a href="index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a href="edit.php">Aumentar ingrediente</a>
+                            <a href="aumentar.php">Aumentar ingrediente</a>
                         </li>
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>

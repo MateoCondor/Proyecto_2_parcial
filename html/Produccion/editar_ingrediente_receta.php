@@ -1,5 +1,14 @@
 <?php
-//Database Connection
+session_start();
+
+if (!isset($_SESSION["user_role"]) || !isset($_SESSION["produccion_login"])) {
+    header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
+}
+
+if ($_SESSION["user_role"] !== "produccion") {
+    header("Location: ../login.php"); // Redirigir si el rol no es admin
+}
+
 include('../dbconnection.php');
 
 if (isset($_POST['submit_cantidad'])) {

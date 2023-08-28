@@ -1,6 +1,7 @@
 <?php
-session_start();
 include('../dbconnection.php');
+
+session_start();
 
 if (!isset($_SESSION["user_role"]) || !isset($_SESSION["produccion_login"])) {
     header("Location: ../login.php"); // Redirigir si no hay inicio de sesión

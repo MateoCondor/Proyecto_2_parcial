@@ -1,4 +1,6 @@
 <?php
+include('../dbconnection.php');
+
 session_start();
 
 if (!isset($_SESSION["user_role"]) || !isset($_SESSION["produccion_login"])) {
@@ -9,7 +11,7 @@ if ($_SESSION["user_role"] !== "produccion") {
     header("Location: ../login.php"); // Redirigir si el rol no es admin
 }
 
-include('../dbconnection.php');
+
 
 
 
@@ -74,6 +76,7 @@ if (isset($_GET['activacionid'])) {
                         <li class="nav-item">
                             <a href="orden_c.php">Crear orden de produccion</a>
                         </li>
+                        
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
                         </li>

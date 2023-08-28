@@ -1,4 +1,5 @@
 <?php
+include('../dbconnection.php');
 session_start();
 
 if (!isset($_SESSION["user_role"]) || !isset($_SESSION["produccion_login"])) {
@@ -9,7 +10,7 @@ if ($_SESSION["user_role"] !== "produccion") {
     header("Location: ../login.php"); // Redirigir si el rol no es admin
 }
 
-include('../dbconnection.php');
+
 
 ?>
 <!doctype html>
