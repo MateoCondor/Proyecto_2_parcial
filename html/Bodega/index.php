@@ -92,7 +92,7 @@ if (isset($_GET['activacionid'])) {
                             <a href="ingreso.php">Ingresar nuevo ingrediente</a>
                         </li>
                         <li class="nav-item">
-                            <a href="edit.php">Aumentar inventario de ingrediente</a>
+                            <a href="aumentar.php">Aumentar inventario de ingrediente</a>
                         </li>
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
@@ -163,7 +163,7 @@ if (isset($_GET['activacionid'])) {
                                             </td>
                                             <td>
                                                 <?php if ($row['Active'] == 1): ?>
-                                                    <a href="edit3.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit"
+                                                    <a href="editar_ingrediente.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit"
                                                         title="Editar" data-toggle="tooltip"><i
                                                             class="material-icons">&#xE254;</i></a>
                                                     <a href="index.php?delid=<?php echo ($row['ID']); ?>" class="delete"

@@ -79,9 +79,6 @@ if (isset($_POST['submit'])) {
                             <a href="ingreso.php">Ingresar nuevo ingrediente</a>
                         </li>
                         <li class="nav-item">
-                            <a href="edit.php">Aumentar inventario de ingrediente</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
                         </li>
                     </ul>
