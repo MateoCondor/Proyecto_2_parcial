@@ -12,9 +12,6 @@ if ($_SESSION["user_role"] !== "bodega") {
 include('../dbconnection.php');
 
 if (isset($_POST['submit'])) {
-
-
-
     $descu = $_POST['nombre'];
 
     $ret2 = mysqli_query($con, "select * from tblingredientes where Descripcion='$descu'");
@@ -22,11 +19,15 @@ if (isset($_POST['submit'])) {
         $cantidad = $_POST['cantidad'] + $row2['Cantidad'];
         $cod = $row2['ID'];
         $unidad = $row2['Unidad'];
+        $precio = $row2['Precio'];
     }
 
     //Query for data updation
     $query = mysqli_query($con, "update  tblingredientes set  Cantidad='$cantidad' where Descripcion='$descu'");
-    $query2 = mysqli_query($con, "insert into tblingreso (ID, CantIngresada, UnidadIng) value('$cod','$cantidad','$unidad')");
+    if ($descu = $_POST['nombre'] != '') {
+        $query2 = mysqli_query($con, "insert into tblingreso (ID, CantIngresada, UnidadIng) value('$cod','$cantidad','$unidad')");
+    }
+
 
     if ($query || $query2) {
         echo "<script>alert('You have successfully update the data');</script>";
@@ -86,10 +87,7 @@ if (isset($_POST['submit'])) {
                             <a href="index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a href="ingreso.php">Ingresar nuevo ingrediente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="edit.php">Aumentar inventario de ingrediente</a>
+                            <a href="edit.php">Aumentar ingrediente</a>
                         </li>
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
@@ -127,7 +125,6 @@ if (isset($_POST['submit'])) {
                         });
                     </script>
 
-
                     <form action="" method="POST">
 
                         <div class="form-group">
@@ -136,18 +133,23 @@ if (isset($_POST['submit'])) {
                             $ret = mysqli_query($con, "select * from tblingredientes where Descripcion='$desc'");
                             while ($row = mysqli_fetch_array($ret)) {
                                 ?>
-
-                                <label for="nombre">Nombre:</label>
-                                <input type="text" id="nombre" name="nombre" value="<?php echo $row['Descripcion']; ?>"
-                                    required><br><br>
-
-                                <label for="cantidad">Cantidad:</label>
+                                <input type="hidden" id="nombre" name="nombre" value="<?php echo $row['Descripcion']; ?>"
+                                    required> 
+                                <label for="cantidad">Cantidad actual <b> <?php echo $row['Cantidad']; ?></b> </label><br>    
+                                <label for="cantidad">Añadir: </label>
                                 <input type="number" id="cantidad" name="cantidad" required>
                                 <?php echo $row['Unidad']; ?><br><br>
                                 <?php
                             } ?>
                             <div class="form-group">
-                                <button type="submit" class="boton perz" name="submit">Aumentar datos</button>
+                                <?php
+                                if ($desc != '') {
+                                    ?>
+                                    <button type="submit" class="boton perz" name="submit">Aumentar datos</button>
+                                    <?php
+                                }
+                                ?>
+                                
                                 <a href="index.php" class="boton perz">Cancelar</a>
                             </div>
                         </div>

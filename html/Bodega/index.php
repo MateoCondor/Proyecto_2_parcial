@@ -30,14 +30,12 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['delid'])) {
     $rid = intval($_GET['delid']);
     $sql = mysqli_query($con, "UPDATE `tblingredientes` SET `Active`= '0' where ID=$rid");
-    echo "<script>alert('Data deleted');</script>";
     echo "<script>window.location.href = 'index.php'</script>";
 }
 
 if (isset($_GET['activacionid'])) {
     $rid = intval($_GET['activacionid']);
     $sql = mysqli_query($con, "UPDATE `tblingredientes` SET `Active`= '1' where ID=$rid");
-    echo "<script>alert('Data deleted');</script>";
     echo "<script>window.location.href = 'index.php'</script>";
 }
 
@@ -94,7 +92,7 @@ if (isset($_GET['activacionid'])) {
                             <a href="ingreso.php">Ingresar nuevo ingrediente</a>
                         </li>
                         <li class="nav-item">
-                            <a href="edit.php">Aumentar inventario de ingrediente</a>
+                            <a href="aumentar.php">Aumentar inventario de ingrediente</a>
                         </li>
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
@@ -165,17 +163,18 @@ if (isset($_GET['activacionid'])) {
                                             </td>
                                             <td>
                                                 <?php if ($row['Active'] == 1): ?>
-                                                    <a href="edit3.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit"
+                                                    <a href="editar_ingrediente.php?editid=<?php echo htmlentities($row['ID']); ?>" class="edit"
                                                         title="Editar" data-toggle="tooltip"><i
                                                             class="material-icons">&#xE254;</i></a>
                                                     <a href="index.php?delid=<?php echo ($row['ID']); ?>" class="delete"
-                                                        title="Delete" data-toggle="tooltip"><i
-                                                            class="material-icons">&#xE872;</i></a>
+                                                        title="Delete" data-toggle="tooltip"
+                                                        onclick="return confirm('Porfavor confirma que deseas desactivar este ingrediente');"><i
+                                                            class="material-icons">&#xE5C9;</i></a>
                                                 <?php else: ?>
-
                                                     <a href="index.php?activacionid=<?php echo ($row['ID']); ?>" class="delete"
-                                                        title="Activate" data-toggle="tooltip"><i
-                                                            class="material-icons">&#xE876;</i></a>
+                                                        title="Activate" data-toggle="tooltip"
+                                                        onclick="return confirm('Porfavor confirma que deseas activar este ingrediente');"><i
+                                                            class="material-icons">&#xE86C;</i></a>
                                                 <?php endif; ?>
 
                                             </td>

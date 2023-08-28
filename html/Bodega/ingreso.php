@@ -124,7 +124,9 @@ if (isset($_POST['submit'])) {
                                 <label for="precio">Precio por Unidad de Medida:</label>
                                 <input type="number" step="0.01" id="precio" name="precio" required>
                             </div>
+                            
                         </div>
+                        <br><br>
                         <button type="submit" class="boton perz" name="submit">Agregar ingrediente</button>
                         <a href="index.php" class="boton perz">Cancelar</a>
 

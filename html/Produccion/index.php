@@ -8,6 +8,24 @@ if (!isset($_SESSION["user_role"]) || !isset($_SESSION["produccion_login"])) {
 if ($_SESSION["user_role"] !== "produccion") {
     header("Location: ../login.php"); // Redirigir si el rol no es admin
 }
+
+include('../dbconnection.php');
+
+
+
+if (isset($_GET['delid'])) {
+    $rid = intval($_GET['delid']);
+    $sql = mysqli_query($con, "UPDATE `datos_receta` SET `Active`= '0' where Codigo=$rid");
+    echo "<script>window.location.href = 'index.php'</script>";
+}
+
+if (isset($_GET['activacionid'])) {
+    $rid = intval($_GET['activacionid']);
+    $sql = mysqli_query($con, "UPDATE `datos_receta` SET `Active`= '1' where Codigo=$rid");
+    echo "<script>window.location.href = 'index.php'</script>";
+}
+
+
 ?>
 <!doctype html>
 <html>
@@ -51,9 +69,11 @@ if ($_SESSION["user_role"] !== "produccion") {
                 <nav>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a href="">seccion pagina</a>
+                            <a href="creacion.php">Crear nueva receta</a>
                         </li>
-                        <!--aqui se ponen las secciones que tendra cada pagina inicial de cada perfil-->
+                        <li class="nav-item">
+                            <a href="orden_c.php">Crear orden de produccion</a>
+                        </li>
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
                         </li>
@@ -66,7 +86,68 @@ if ($_SESSION["user_role"] !== "produccion") {
                     <?php echo $_SESSION["username"]; ?>
                 </h3>
                 <div class="container">
-                    <!-- Contenido de la pagina -->
+                    <table class="table my-4 table-borderless m-0">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Nombre de la Pizza</th>
+                                <th>Costo total</th>
+                                <th>Activo</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $ret = mysqli_query($con, "select * from datos_receta");
+                            $cnt = 1;
+                            $row = mysqli_num_rows($ret);
+                            if ($row > 0) {
+                                while ($row = mysqli_fetch_array($ret)) {
+                                    ?>
+                                    <tr <?php echo $rowClass; ?>>
+                                        <td>
+                                            <?php echo $row['Codigo']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $row['NombreReceta']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $row['PrecioReceta']; ?> $
+                                        </td>
+                                        <td>
+                                            <?php echo $row['Active']; ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($row['Active'] == 1): ?>
+                                                <a href="ver_receta.php?viewid=<?php echo htmlentities($row['Codigo']); ?>" class="view"
+                                                title="Ver" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                                                <a href="editar_receta.php?editid=<?php echo htmlentities($row['Codigo']); ?>" class="edit"
+                                                    title="Editar" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                                                <a href="index.php?delid=<?php echo ($row['Codigo']); ?>" class="delete" title="Delete"
+                                                    data-toggle="tooltip"
+                                                    onclick="return confirm('Porfavor confirma que deseas desactivar este ingrediente');"><i
+                                                        class="material-icons">&#xE5C9;</i></a>
+                                            <?php else: ?>
+                                                <a href="ver_receta.php?viewid=<?php echo htmlentities($row['Codigo']); ?>" class="view"
+                                                title="Ver" data-toggle="tooltip"><i class="material-icons">&#xE417;</i></a>
+                                                <a href="index.php?activacionid=<?php echo ($row['Codigo']); ?>" class="delete"
+                                                    title="Activate" data-toggle="tooltip"
+                                                    onclick="return confirm('Porfavor confirma que deseas activar este ingrediente');"><i
+                                                        class="material-icons">&#xE86C;</i></a>
+                                            <?php endif; ?>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                    $cnt = $cnt + 1;
+                                }
+                            } else { ?>
+                                <tr>
+                                    <th style="text-align:center; color:red;" colspan="6">No Record Found</th>
+                                </tr>
+                            <?php } ?>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

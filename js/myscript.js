@@ -54,7 +54,7 @@ function agregarIngrediente() {
 
 
 
-function agregarIngredienteStock() {
+function agregarIngredienteReceta() {
 
   const contenedorIngredientes = document.getElementById("ingredientsContainer");
   const tablaIngredientes = document.getElementById("ingredientsTable");

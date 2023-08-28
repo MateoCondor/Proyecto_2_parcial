@@ -2,6 +2,9 @@
 require_once 'DBconect.php';
 session_start();
 
+
+include('dbconnection.php');
+
 if (isset($_SESSION["admin_login"])) {
     header("location: ");
     exit();
@@ -22,69 +25,82 @@ if (isset($_REQUEST['btn_login'])) {
     $password = $_REQUEST["txt_password"];
 
     if (empty($email)) {
-        $errorMsg[] = "Por favor ingrese Email";
+        echo "<script>alert('Por favor ingrese Email');</script>";
     } else if (empty($password)) {
-        $errorMsg[] = "Por favor ingrese Password";
+        echo "<script>alert('Por favor ingrese Password');</script>";
     } else {
         try {
-            $select_stmt = $db->prepare("SELECT email, password, username, role FROM mainlogin WHERE email=:uemail AND password=:upassword");
+            $select_stmt = $db->prepare("SELECT id, email, password, username, role, Active FROM mainlogin WHERE email=:uemail");
+
             $select_stmt->bindParam(":uemail", $email);
-            $select_stmt->bindParam(":upassword", $password);
             $select_stmt->execute();
 
             if ($select_stmt->rowCount() > 0) {
                 $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
+                $dbid = $row['id'];
                 $dbemail = $row["email"];
-                $dbpassword = $row["password"];
+                $dbhashed_password = $row["password"];
                 $dbrole = $row["role"];
                 $dbusername = $row["username"];
+                $dbactive = $row["Active"];
+                $query2 = mysqli_query($con, "insert into registro_is (ID, UserName, Email) value('$dbid','$dbusername','$dbemail')");
 
-                switch ($dbrole) {
-                    case "admin":
-                        $_SESSION["admin_login"] = $email;
-                        $_SESSION["username"] = $dbusername;
-                        $_SESSION["user_role"] = "admin";
-                        $loginMsg = "Admin: Inicio sesión con éxito";
-                        header("refresh:0; Administrador/index.php");
-                        break;
+                if ($dbhashed_password === md5($password)) {
+                    if ($dbactive != 0) {
 
-                    case "bodega":
-                        $_SESSION["bodega_login"] = $email;
-                        $_SESSION["username"] = $dbusername;
-                        $_SESSION["user_role"] = "bodega";
-                        $loginMsg = "Personal: Inicio sesión con éxito";
-                        header("refresh:0; Bodega/index.php");
-                        break;
 
-                    case "produccion":
-                        $_SESSION["produccion_login"] = $email;
-                        $_SESSION["username"] = $dbusername;
-                        $_SESSION["user_role"] = "produccion";
-                        $loginMsg = "Usuario: Inicio sesión con éxito";
-                        header("refresh:0; Produccion/index.php");
-                        break;
+                        switch ($dbrole) {
+                            case "admin":
+                                $_SESSION["admin_login"] = $email;
+                                $_SESSION["username"] = $dbusername;
+                                $_SESSION["user_role"] = "admin";
+                                $loginMsg = "Admin: Inicio sesión con éxito";
+                                header("refresh:0; Administrador/index.php");
+                                break;
 
-                    case "ventas":
-                        $_SESSION["ventas_login"] = $email;
-                        $_SESSION["username"] = $dbusername;
-                        $_SESSION["user_role"] = "ventas";
-                        $loginMsg = "Admin: Inicio sesión con éxito";
-                        header("refresh:0; Ventas/index.php");
-                        break;
+                            case "bodega":
+                                $_SESSION["bodega_login"] = $email;
+                                $_SESSION["username"] = $dbusername;
+                                $_SESSION["user_role"] = "bodega";
+                                $loginMsg = "Personal: Inicio sesión con éxito";
+                                header("refresh:0; Bodega/index.php");
+                                break;
 
-                    case "reportes":
-                        $_SESSION["reportes_login"] = $email;
-                        $_SESSION["username"] = $dbusername;
-                        $_SESSION["user_role"] = "reportes";
-                        $loginMsg = "Admin: Inicio sesión con éxito";
-                        header("refresh:0; Reportes/index.php");
-                        break;
+                            case "produccion":
+                                $_SESSION["produccion_login"] = $email;
+                                $_SESSION["username"] = $dbusername;
+                                $_SESSION["user_role"] = "produccion";
+                                $loginMsg = "Usuario: Inicio sesión con éxito";
+                                header("refresh:0; Produccion/index.php");
+                                break;
 
-                    default:
-                        $errorMsg[] = "Correo electrónico o contraseña incorrectos";
+                            case "ventas":
+                                $_SESSION["ventas_login"] = $email;
+                                $_SESSION["username"] = $dbusername;
+                                $_SESSION["user_role"] = "ventas";
+                                $loginMsg = "Admin: Inicio sesión con éxito";
+                                header("refresh:0; Ventas/index.php");
+                                break;
+
+                            case "reportes":
+                                $_SESSION["reportes_login"] = $email;
+                                $_SESSION["username"] = $dbusername;
+                                $_SESSION["user_role"] = "reportes";
+                                $loginMsg = "Admin: Inicio sesión con éxito";
+                                header("refresh:0; Reportes/index.php");
+                                break;
+
+                            default:
+                                echo "<script>alert('Correo electrónico o contraseña incorrectos');</script>";
+                        }
+                    } else {
+                        echo "<script>alert('Usuario inactivo, hable con el administrador para activar el usuario');</script>";
+                    }
+                } else {
+                    echo "<script>alert('Correo electrónico o contraseña incorrectos');</script>";
                 }
             } else {
-                $errorMsg[] = "Correo electrónico o contraseña incorrectos";
+                echo "<script>alert('Correo electrónico o contraseña incorrectos');</script>";
             }
         } catch (PDOException $e) {
             echo $e->getMessage();
