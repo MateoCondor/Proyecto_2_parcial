@@ -5,7 +5,7 @@ if ($con->connect_error) {
     die("Conexión fallida: " . $con->connect_error);
 }
 
-$sql = "SELECT ID, Descripcion, Cantidad, Unidad, Precio, FechaIngreso, Active FROM tblingredientes";
+$sql = "SELECT ID, Descripcion, Cantidad, Unidad, Precio, FechaIngreso FROM tblingredientes";
 $result = $con->query($sql);
 
 // Encabezado y salida del archivo XML
@@ -24,7 +24,6 @@ if ($result->num_rows > 0) {
         echo "\t\t<Unidad>" . $row["Unidad"] . "</Unidad>" . PHP_EOL;
         echo "\t\t<Precio>" . $row["Precio"] . "</Precio>" . PHP_EOL;
         echo "\t\t<FechaIngreso>" . $row["FechaIngreso"] . "</FechaIngreso>" . PHP_EOL;
-        echo "\t\t<Active>" . $row["Active"] . "</Active>" . PHP_EOL;
         echo "\t</ingrediente>" . PHP_EOL;
     }
 }

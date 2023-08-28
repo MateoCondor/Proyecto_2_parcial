@@ -1,5 +1,6 @@
 <?php
 session_start();
+include('../dbconnection.php'); // Asegúrate de incluir el archivo de conexión a la base de datos
 
 // if (!isset($_SESSION["user_role"]) || !isset($_SESSION["ventas_login"])) {
 //     header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
@@ -63,11 +64,60 @@ session_start();
             </div>
             <div class="col col-sm-12 col-md-12 col-lg-8 col-xl-8 m-0">
                 <h2>Sistema ventas </h2>
-                <h3>Bienvenido,
-                    <?php echo $_SESSION["username"]; ?>
+                <h3>Bienvenido
                 </h3>
                 <div class="container">
-                    <!-- Contenido de la pagina -->
+                    <form action="procesar_factura.php" method="post">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="cedula">Cédula:</label>
+                                <input type="text" name="cedula" id="cedula" class="form-control" required><br><br>
+
+                                <label for="nombre">Nombre:</label>
+                                <input type="text" name="nombre" id="nombre" class="form-control" required><br><br>
+
+                                <label for="apellido">Apellido:</label>
+                                <input type="text" name="apellido" id="apellido" class="form-control" required><br><br>
+
+                                <label for="celular">Celular:</label>
+                                <input type="text" name="celular" id="celular" class="form-control" required><br><br>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="direccion">Dirección:</label>
+                                <input type="text" name="direccion" id="direccion" class="form-control"
+                                    required><br><br>
+
+                                <label for="correo">Correo:</label>
+                                <input type="email" name="correo" id="correo" class="form-control" required><br><br>
+
+                                <label for="receta">Selecciona una receta:</label>
+                                <select name="receta" id="receta" class="form-select">
+                                    <?php
+                                    $query = "SELECT Codigo, NombreReceta FROM datos_receta WHERE Active = 1";
+                                    $result = $con->query($query);
+
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $codigo = $row["Codigo"];
+                                            $nombreReceta = $row["NombreReceta"];
+                                            echo "<option value='$codigo'>$nombreReceta</option>";
+                                        }
+                                    } else {
+                                        echo "<option value=''>No hay recetas disponibles</option>";
+                                    }
+                                    ?>
+                                </select><br><br>
+
+                                <label for="cantidad">Cantidad:</label>
+                                <input type="number" name="cantidad" id="cantidad" min="1" class="form-control"
+                                    required><br><br>
+                            </div>
+                        </div>
+
+                        <input type="submit" value="Generar Factura">
+                    </form>
+                    
+
                 </div>
             </div>
         </div>

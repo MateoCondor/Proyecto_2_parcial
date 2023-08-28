@@ -1,6 +1,6 @@
 <?php
 
-require('fpdf/fpdf.php');
+require('../../fpdf/fpdf.php');
 
 class PDF extends FPDF
 {
@@ -19,7 +19,6 @@ class PDF extends FPDF
         $this->Cell(30, 10, 'Unidad', 1);
         $this->Cell(30, 10, 'Precio', 1);
         $this->Cell(45, 10, 'Fecha Ingreso', 1); // Agregada columna "Fecha Ingreso"
-        $this->Cell(15, 10, 'Active', 1); // Agregada columna "Active"
         $this->Ln();
     }
 
@@ -40,7 +39,7 @@ include('../dbconnection.php');
 if ($con->connect_error) {
     die("Conexión fallida: " . $con->connect_error);
 }
-$sql = "SELECT ID, Descripcion, Cantidad, Unidad, Precio, FechaIngreso, Active FROM tblingredientes";
+$sql = "SELECT ID, Descripcion, Cantidad, Unidad, Precio, FechaIngreso FROM tblingredientes";
 $result = $con->query($sql);
 
 $pdf->SetFont('Arial', '', 12);
@@ -52,7 +51,6 @@ if ($result->num_rows > 0) {
         $pdf->Cell(30, 10, $row["Unidad"], 1);
         $pdf->Cell(30, 10, $row["Precio"], 1);
         $pdf->Cell(45, 10, $row["FechaIngreso"], 1); // Agregada columna "Fecha Ingreso"
-        $pdf->Cell(15, 10, $row["Active"], 1); // Agregada columna "Active"
         $pdf->Ln();
     }
 } else {

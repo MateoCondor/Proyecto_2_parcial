@@ -11,7 +11,7 @@ if ($_SESSION["user_role"] !== "bodega") {
 }
 
 if ($con->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+    die("Conexión fallida: " . $con->connect_error);
 }
 $sql = "SELECT ID, Descripcion, Cantidad, Unidad, Precio, FechaIngreso, Active FROM tblingredientes";
 $result = $con->query($sql);
@@ -99,7 +99,6 @@ $result = $con->query($sql);
                                 <th>Unidad</th>
                                 <th>Precio</th>
                                 <th>Fecha de ingreso</th>
-                                <th>Activo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,7 +115,6 @@ $result = $con->query($sql);
                                     echo "<td>" . $row["Unidad"] . "</td>";
                                     echo "<td>" . $row["Precio"] . "</td>";
                                     echo "<td>" . $row["FechaIngreso"] . "</td>";
-                                    echo "<td>" . $row["Active"] . "</td>";
                                     echo "</tr>";
                                 }
                             } else {
