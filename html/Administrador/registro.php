@@ -157,7 +157,6 @@ if (isset($_REQUEST['btn_register'])) //compruebe el nombre del botón "btn_regi
                                         <option value="bodega">Bodega</option>
                                         <option value="produccion">Produccion</option>
                                         <option value="ventas">Ventas</option>
-                                        <option value="reportes">Reportes</option>
                                     </select>
                                 </div>
                             </div>

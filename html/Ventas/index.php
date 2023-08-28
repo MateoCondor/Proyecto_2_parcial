@@ -9,6 +9,7 @@ include('../dbconnection.php'); // Asegúrate de incluir el archivo de conexión
 // if ($_SESSION["user_role"] !== "ventas") {
 //     header("Location: ../login.php"); // Redirigir si el rol no es admin
 // }
+
 ?>
 
 <!doctype html>
