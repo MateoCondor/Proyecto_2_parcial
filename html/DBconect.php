@@ -1,8 +1,8 @@
 <?php
 $db_host="localhost"; //localhost server 
 $db_user="root"; //database username
-$db_password="rootroot"; //database password 
-$db_name="proyecto_bd"; //database name
+$db_password=""; //database password 
+$db_name="proyecto_db"; //database name
 
 try
 {

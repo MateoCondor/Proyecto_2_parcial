@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+include('../dbconnection.php');
 // if (!isset($_SESSION["user_role"]) || !isset($_SESSION["bodega_login"])) {
 //     header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
 // }
@@ -8,24 +8,13 @@ session_start();
 // if ($_SESSION["user_role"] !== "bodega") {
 //     header("Location: ../login.php"); // Redirigir si el rol no es admin
 // }
-
-include('../dbconnection.php');
-if (isset($_POST['submit'])) {
-    //getting the post values
-    $desc = $_POST['nombre'];
-    $cantidad = $_POST['cantidad'];
-    $umedida = $_POST['unidad'];
-    $preciou = $_POST['precio'];
-
-    // Query for data insertion
-    $query = mysqli_query($con, "insert into tblingredientes ( Descripcion, Cantidad, Unidad, Precio, Active) value('$desc','$cantidad', '$umedida', '$preciou', '1' )");
-    if ($query) {
-        echo "<script>alert('You have successfully inserted the data');</script>";
-        echo "<script type='text/javascript'> document.location ='index.php'; </script>";
-    } else {
-        echo "<script>alert('Something Went Wrong. Please try again');</script>";
-    }
+if ($con->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
 }
+$sql = "SELECT ID, Descripcion, Cantidad, Unidad, Precio, FechaIngreso, Active FROM tblingredientes";
+$result = $con->query($sql);
+
+
 
 ?>
 
@@ -87,48 +76,56 @@ if (isset($_POST['submit'])) {
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
                         </li>
-                        
+
                     </ul>
                 </nav>
             </div>
             <div class="col col-sm-12 col-md-12 col-lg-8 col-xl-8 m-0">
-                <h3>Ingreso de Ingredientes a inventario</h3>
+                <a href="ingredientesPDF.php" class="boton perz">Generar PDF</a>
+                <a href="ingredientesEXCEL.php" class="boton perz">Generar Excel</a>
+                <a href="ingredientesXML.php" class="boton perz">Generar XML</a>
+                <h3>Rerporte de inventario</h3>
 
-                <div id="ingredientsContainer">
-                    <form action="" method="POST">
-                        <div class="row ">
-                            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-8 mt-3">
-                                <label for="nombre">Nombre del Ingrediente:</label>
-                                <input type="text" id="nombre" name="nombre" required>
-                            </div>
-                        </div>
+                <div id="reportesContainer">
 
-                        <div class="row ">
-                            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mt-4">
-                                <label for="cantidad">Cantidad:</label>
-                                <input type="number" id="cantidad" name="cantidad" required>
-                            </div>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Descripción</th>
+                                <th>Cantidad</th>
+                                <th>Unidad</th>
+                                <th>Precio</th>
+                                <th>Fecha de ingreso</th>
+                                <th>Activo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
 
-                            <div class="col-sm-12 col-md-6 col-lg-3 col-xl-4 my-4">
-                                <label for="unidad">Unidad de Medida:</label>
-                                <select id="unidad" name="unidad">
-                                    <option value="Kilogramo/s">Kilogramos (kg)</option>
-                                    <option value="Gramos">Gramos (g)</option>
-                                    <option value="Litro/s">Litros (l)</option>
-                                    <option value="Mililitros">Mililitros (ml)</option>
-                                    <option value="Unidad/es">Unidad/es</option>
-                                </select>
-                            </div>
 
-                            <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 mt-4">
-                                <label for="precio">Precio por Unidad de Medida:</label>
-                                <input type="number" step="0.01" id="precio" name="precio" required>
-                            </div>
-                        </div>
-                        <button type="submit" class="boton perz" name="submit">Agregar ingrediente</button>
-                        <a href="index.php" class="boton perz">Cancelar</a>
 
-                    </form>
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo "<tr>";
+                                    echo "<td>" . $row["ID"] . "</td>";
+                                    echo "<td>" . $row["Descripcion"] . "</td>";
+                                    echo "<td>" . $row["Cantidad"] . "</td>";
+                                    echo "<td>" . $row["Unidad"] . "</td>";
+                                    echo "<td>" . $row["Precio"] . "</td>";
+                                    echo "<td>" . $row["FechaIngreso"] . "</td>";
+                                    echo "<td>" . $row["Active"] . "</td>";
+                                    echo "</tr>";
+                                }
+                            } else {
+                                echo "<tr><td colspan='5'>No se encontraron ingredientes en la base de datos.</td></tr>";
+                            }
+
+                            $con->close();
+                            ?>
+
+                        </tbody>
+                    </table>
                 </div>
                 </form>
             </div>

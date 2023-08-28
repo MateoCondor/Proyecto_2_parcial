@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-if (!isset($_SESSION["user_role"]) || !isset($_SESSION["ventas_login"])) {
-    header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
-}
+// if (!isset($_SESSION["user_role"]) || !isset($_SESSION["ventas_login"])) {
+//     header("Location: ../login.php"); // Redirigir si no hay inicio de sesión
+// }
 
-if ($_SESSION["user_role"] !== "ventas") {
-    header("Location: ../login.php"); // Redirigir si el rol no es admin
-}
+// if ($_SESSION["user_role"] !== "ventas") {
+//     header("Location: ../login.php"); // Redirigir si el rol no es admin
+// }
 ?>
 
 <!doctype html>
