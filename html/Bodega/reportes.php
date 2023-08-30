@@ -67,12 +67,6 @@ $result = $con->query($sql);
                             <a href="index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a href="ingreso.php">Ingresar nuevo ingrediente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="edit.php">Aumentar inventario de ingrediente</a>
-                        </li>
-                        <li class="nav-item">
                             <a href="reportes.php">Reporte de inventario</a>
                         </li>
                         <li class="nav-item">

@@ -19,6 +19,7 @@ if (isset($_POST['submit'])) {
 
     // Query for data insertion
     $query = mysqli_query($con, "insert into tblingredientes ( Descripcion, Cantidad, Unidad, Precio, Active) value('$desc','$cantidad', '$umedida', '$preciou', '1' )");
+    $query2 = mysqli_query($con, "insert into tblingredientesinit ( Descripcion, Cantidad, Unidad, Precio, Active) value('$desc','$cantidad', '$umedida', '$preciou', '1' )");
     if ($query) {
         echo "<script>alert('You have successfully inserted the data');</script>";
         echo "<script type='text/javascript'> document.location ='index.php'; </script>";
@@ -75,13 +76,6 @@ if (isset($_POST['submit'])) {
                         <li class="nav-item">
                             <a href="index.php">Inicio</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="ingreso.php">Ingresar nuevo ingrediente</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="edit.php">Aumentar inventario de ingrediente</a>
-                        </li>
-
                         <li class="nav-item">
                             <a href="../cerrar_sesion.php">Salir</a>
                         </li>

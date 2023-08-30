@@ -19,17 +19,17 @@ if (isset($_REQUEST['btn_register'])) //compruebe el nombre del botón "btn_regi
     $role = $_REQUEST['txt_role']; //seleccion nombre "txt_role"
 
     if (empty($username)) {
-        $errorMsg[] = "Ingrese nombre de usuario"; //Compruebe input nombre de usuario no vacío
+        echo "<script>alert('Ingrese nombre de usuario');</script>"; //Compruebe input nombre de usuario no vacío
     } else if (empty($email)) {
-        $errorMsg[] = "Ingrese email"; //Revisar email input no vacio
+        echo "<script>alert('Ingrese email');</script>"; //Revisar email input no vacio
     } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errorMsg[] = "Ingrese email valido"; //Verificar formato de email
+        echo "<script>alert('Ingrese email valido');</script>"; //Verificar formato de email
     } else if (empty($password)) {
-        $errorMsg[] = "Ingrese password"; //Revisar password vacio o nulo
+        echo "<script>alert('Ingrese password');</script>"; //Revisar password vacio o nulo
     } else if (strlen($password) < 6) {
-        $errorMsg[] = "Password minimo 6 caracteres"; //Revisar password 6 caracteres
+        echo "<script>alert('Password minimo 6 caracteres');</script>"; //Revisar password 6 caracteres
     } else if (empty($role)) {
-        $errorMsg[] = "Seleccione rol"; //Revisar etiqueta select vacio
+        echo "<script>alert('Seleccione rol');</script>";
     } else {
         try {
             $select_stmt = $db->prepare("SELECT username, email FROM mainlogin WHERE username=:uname OR email=:uemail"); // consulta sql
@@ -38,9 +38,9 @@ if (isset($_REQUEST['btn_register'])) //compruebe el nombre del botón "btn_regi
             $select_stmt->execute();
             $row = $select_stmt->fetch(PDO::FETCH_ASSOC);
             if ($row["username"] == $username) {
-                $errorMsg[] = "Usuario ya existe"; //Verificar usuario existente
+                echo "<script>alert('Usuario existente');</script>"; //Verificar usuario existente
             } else if ($row["email"] == $email) {
-                $errorMsg[] = "Email ya existe"; //Verificar email existente
+                echo "<script>alert('Email existente');</script>"; //Verificar email existente
             } else if (!isset($errorMsg)) {
                 $hashed_password = md5($password);
                 $insert_stmt = $db->prepare("INSERT INTO mainlogin(username,email,password,role) VALUES(:uname,:uemail,:upassword,:urole)");
@@ -50,7 +50,7 @@ if (isset($_REQUEST['btn_register'])) //compruebe el nombre del botón "btn_regi
                 $insert_stmt->bindParam(":urole", $role);
 
                 if ($insert_stmt->execute()) {
-                    $registerMsg = "Registro exitoso: Esperar página de inicio de sesión";
+                    echo "<script>alert('Registro exitoso');</script>";
                     header("refresh:0;index.php");
                 }
             }
